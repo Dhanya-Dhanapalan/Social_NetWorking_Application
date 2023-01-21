@@ -1,0 +1,75 @@
+{%extends 'base.html'%}
+
+{%block body_block%}
+
+<div class="row">
+  {%for m in messages%} 
+  {%if m.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+       <strong>{{m}}!</strong> 
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {%endif%}
+  
+  {%if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS%} 
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+       <strong>{{m}}</strong> 
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {%endif%}
+  {%endfor%}
+
+</div>
+
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          My_Posts
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                {%for p in posts%} 
+                
+                    <div class="post-preview">
+                      <a href="post.html">
+                        <h2 class="post-title">{{p.title}}</h2> 
+                    </a>
+                        {%if p.image%} 
+                            <div>
+                                <img src="{{p.image.url}}" alt="" class="w-50 rounded">
+                            </div>
+                            {%endif%}
+                        
+                        
+                        <div class="row">
+                          <div class="col"><a href="{%url 'post-delete' p.id%}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Delete</a></div>
+                        </div>
+                        <p class="post-meta">{{p.like_count}} Likes 
+                            
+                            Posted on {{p.created_date}}
+                        </p>
+
+                    <h5 class="post-title">Comments</h5>
+                    {%for cmnt in p.post_comments%} 
+                    <div class="border rounded-pill p-3 mt-2">
+                        {{cmnt}}  <span class="post-meta">
+                            Posted by
+                            <a href="#!">{{cmnt.user}}</a>
+                            on {{cmnt.created_date}}
+                        </span>
+                    </div>
+                    {%endfor%}
+                    <hr class="my-4" />
+
+                    {%endfor%}
+
+                    <div>
+        </div>
+      </div>
+    </div>
+
+    {%endblock%}

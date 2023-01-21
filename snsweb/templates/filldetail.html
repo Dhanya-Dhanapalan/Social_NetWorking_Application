@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{%block body_block%}
+
+
+
+     <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form action="" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                <label for="id_profile_img" class="text-info">Profile Picture</label><br>
+                <input type="file" id="id_profile_img" name="profile_img" class="text-info"><br><br>
+                <label for="id_work" class="text-info">Work</label><br>
+                <textarea name="work" id="id_work" cols="50" rows="3" class="border"></textarea>
+                <label for="hobby" class="text-info">Hobbies</label>
+                <textarea name="hobby" id="id_hobby" cols="50" rows="3" class="border"></textarea>
+                <label for="gender" class="text-info">Gender</label>
+                <select name="gender" id="id_gender" class="text-info">
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Others">Others</option>
+                </select>
+                <div class="text-center">
+                    <input type="submit" name="submit" class="btn btn-info btn-md text-center" value="Add">
+                </div>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+
+
+{%endblock%}
+
